@@ -10,13 +10,14 @@ import java.util.List;
 
 public class Board {
     private JFrame board = new JFrame("Tic-Tac-Toe");
-    private JButton[] tile = new JButton[9];
+    private JButton[] tile = new JButton[10];
     private JPanel cellPanel = new JPanel();
     private JPanel titlePanel = new JPanel();
     private JLabel titleText = new JLabel();
-    private boolean isComputer = true;
+    private boolean isComputer;
     JOptionPane popup = new JOptionPane();
     List<JButton> tiles = new ArrayList<>();
+    Map<String, String>coolMap = new HashMap<>();
 
     Collection<JButton> compWins = new ArrayList<>();
     Collection<JButton> humanWins = new ArrayList<>();
@@ -47,23 +48,20 @@ public class Board {
         if (isComputer && selected.getText().equals("Click Me!")) {
             selected.setIcon(new ImageIcon("halloween_pennywise-512.png"));
             selected.setText("");
-            compWins.add(selected);
+            tiles.add(selected);
+
             isComputer = false;
-            System.out.println(selected.getActionCommand());
+
 
 
             //TODO send to list to count wins?
         } else if ((!isComputer && selected.getText().equals("Click Me!"))) {
             selected.setIcon(new ImageIcon("yellowRaincoat.png"));
             selected.setText("");
-            humanWins.add(selected);
+            tiles.add(selected);
             isComputer = true;
-            System.out.println(selected);
+            computerTurn();
 
-        } else if (!selected.getText().equals("Click Me!")) {
-            System.out.println("Spot taken");
-
-            //TODO Figure out how to get a message if spot is taken
         }
     }
 
@@ -72,19 +70,38 @@ public class Board {
         board.add(cellPanel);
         board.add(titlePanel, BorderLayout.SOUTH);
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 1; i < 10; i++) {
             tile[i] = new JButton();
             tile[i].setBackground(Color.BLACK);
             cellPanel.add(tile[i]);
-            tiles.add(tile[i]);
-            tile[i].setActionCommand("this is tile" + i);
+        //    tiles.add(tile[i]);
+            tile[i].setActionCommand("" + i);
             tile[i].addActionListener(this::actionPerformed);
             tile[i].setText("Click Me!");
 
         }
     }
 
+    public void computerTurn() {
+        ComputerBrain brain = new ComputerBrain();
+        int rand = brain.think();
+        JButton select = (JButton) tile[rand];
+        if (select.getText().equals("Click Me!")) {
+            select.doClick();
+        } else if (tiles.size() == 9){
+            System.out.println("You win!");
+        }else {
+            computerTurn();
+        }
 
-}
+        }
+
+    }
+
+
+
+
+
+
 
 
