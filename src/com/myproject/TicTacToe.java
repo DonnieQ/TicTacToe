@@ -21,6 +21,8 @@ public class TicTacToe {
         String gameType = UserInput.getUserInput();
         if (gameType.matches("1")) {
             System.out.println("Welcome to TicTacToe ");
+            Board playgame = new Board();
+            playgame.start();
         }
     }
 }
