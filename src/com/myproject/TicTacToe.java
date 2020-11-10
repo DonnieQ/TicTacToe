@@ -23,6 +23,7 @@ public class TicTacToe {
             System.out.println("Welcome to TicTacToe ");
             Board playgame = new Board();
             playgame.start();
+
         }
     }
 }

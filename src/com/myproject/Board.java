@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.sql.PseudoColumnUsage;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Board {
     private JFrame board;
@@ -19,7 +20,7 @@ public class Board {
     List<JButton> tiles = new ArrayList<>();
     Collection<JButton> compSelection = new ArrayList<>();
     Collection<JButton> humanSelection = new ArrayList<>();
-
+    List<String> winningCombo = List.of("1,2,3", "4,5,6");
     Thread thread = new Thread();
 
     public Board() {
@@ -72,7 +73,7 @@ public class Board {
             //TODO
             computerTurn();
             checkWinner();
-            System.out.println(humanSelection);
+            System.out.println(selected.getActionCommand());
         }
     }
 
@@ -86,7 +87,7 @@ public class Board {
             tile[i].setBackground(Color.BLACK);
             cellPanel.add(tile[i]);
             //    tiles.add(tile[i]);
-           // tile[i].setActionCommand(String.valueOf(i));
+            tile[i].setActionCommand(String.valueOf(i));
             tile[i].addActionListener(this::actionPerformed);
             tile[i].setText("Click Me!");
 
@@ -94,7 +95,7 @@ public class Board {
     }
 
     //TODO map?
-    
+
     public void computerTurn() {
 
         while (isComputer && tiles.size() <= 9) {
@@ -127,15 +128,80 @@ public class Board {
 
     public void checkWinner() {
 
-        for (JButton i : humanSelection) {
-            if (humanSelection.contains(tile[1]) &&
-                    humanSelection.contains(tile[2]) &&
-                    humanSelection.contains(tile[3])) {
-                System.out.println("checkWinner");
-
-            }
+        if (humanSelection.contains(tile[1]) &&
+                humanSelection.contains(tile[2]) &&
+                humanSelection.contains(tile[3])) {
+            System.out.println("checkWinner 123");
+        } else if (humanSelection.contains(tile[4]) &&
+                humanSelection.contains(tile[5]) &&
+                humanSelection.contains(tile[6])) {
+            System.out.println("checkWinner456");
+        } else if (humanSelection.contains(tile[7]) &&
+                humanSelection.contains(tile[8]) &&
+                humanSelection.contains(tile[9])) {
+            System.out.println("checkWinner789");
+        } else if (humanSelection.contains(tile[1]) &&
+                humanSelection.contains(tile[4]) &&
+                humanSelection.contains(tile[7])) {
+            System.out.println("checkWinner147");
+        } else if (humanSelection.contains(tile[2]) &&
+                humanSelection.contains(tile[5]) &&
+                humanSelection.contains(tile[8])) {
+            System.out.println("checkWinner258");
+        } else if (humanSelection.contains(tile[3]) &&
+                humanSelection.contains(tile[6]) &&
+                humanSelection.contains(tile[9])) {
+            System.out.println("checkWinner 369");
+        } else if (humanSelection.contains(tile[3]) &&
+                humanSelection.contains(tile[5]) &&
+                humanSelection.contains(tile[7])) {
+            System.out.println("checkWinner 357");
+        } else if (humanSelection.contains(tile[1]) &&
+                humanSelection.contains(tile[5]) &&
+                humanSelection.contains(tile[9])) {
+            System.out.println("checkWinner 159");
+        } else if (compSelection.contains(tile[1]) &&
+                compSelection.contains(tile[2]) &&
+                compSelection.contains(tile[3])) {
+            System.out.println("checkWinner 123");
+        } else if (compSelection.contains(tile[4]) &&
+                compSelection.contains(tile[5]) &&
+                compSelection.contains(tile[6])) {
+            System.out.println("checkWinner456");
+        } else if (compSelection.contains(tile[7]) &&
+                compSelection.contains(tile[8]) &&
+                compSelection.contains(tile[9])) {
+            System.out.println("checkWinner789");
+        } else if (compSelection.contains(tile[1]) &&
+                compSelection.contains(tile[4]) &&
+                compSelection.contains(tile[7])) {
+            System.out.println("checkWinner147");
+        } else if (compSelection.contains(tile[2]) &&
+                compSelection.contains(tile[5]) &&
+                compSelection.contains(tile[8])) {
+            System.out.println("checkWinner258");
+        } else if (compSelection.contains(tile[3]) &&
+                compSelection.contains(tile[6]) &&
+                compSelection.contains(tile[9])) {
+            System.out.println("checkWinner 369");
+        } else if (compSelection.contains(tile[3]) &&
+                compSelection.contains(tile[5]) &&
+                compSelection.contains(tile[7])) {
+            System.out.println("checkWinner 357");
+        } else if (compSelection.contains(tile[1]) &&
+                compSelection.contains(tile[5]) &&
+                compSelection.contains(tile[9])) {
+            System.out.println("checkWinner 159");
         }
     }
+
+//    public void superCheckWinner(){
+//        String[] boxes = winningCombo.get(0).split(",");
+//        for(String box : boxes){
+//            if(Stream.of(humanSelection).findAny());
+//            System.out.println("win");
+//        }
+//    }
 }
 
 //    public void hardMode() {

@@ -4,7 +4,6 @@ import java.util.Random;
 
 class ComputerBrain {
 
-
     public static int think() {
         int min = 1;
         int max = 9;
