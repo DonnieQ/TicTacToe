@@ -22,6 +22,7 @@ public class TicTacToe {
         if (gameType.matches("1")) {
             System.out.println("Welcome to TicTacToe ");
             Board playgame = new Board();
+
             playgame.start();
 
         }
