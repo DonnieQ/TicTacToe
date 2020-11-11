@@ -17,13 +17,14 @@ public class Board {
     private boolean isComputer;
     JOptionPane popup = new JOptionPane();
     List<JButton> tiles = new ArrayList<>();
-    Map<String, String>coolMap = new HashMap<>();
+    Map<String, String> coolMap = new HashMap<>();
+    ComputerBrain brain = new ComputerBrain("halloween_pennywise-512.png");
+    Human human = new Human("Randal","yellowRaincoat.png");
 
-    Collection<JButton> compWins = new ArrayList<>();
-    Collection<JButton> humanWins = new ArrayList<>();
 
+
+    //SETS UP BOARD
     public Board() {
-
         board.setVisible(true);
         board.setSize(900, 900);
         board.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -39,9 +40,7 @@ public class Board {
 
         cellPanel.setLayout(new GridLayout(3, 3));
         cellPanel.setBackground(Color.BLACK);
-
     }
-
 
     public void actionPerformed(ActionEvent e) {
         JButton selected = (JButton) e.getSource();
@@ -49,9 +48,7 @@ public class Board {
             selected.setIcon(new ImageIcon("halloween_pennywise-512.png"));
             selected.setText("");
             tiles.add(selected);
-
             isComputer = false;
-
 
 
             //TODO send to list to count wins?
@@ -60,8 +57,12 @@ public class Board {
             selected.setText("");
             tiles.add(selected);
             isComputer = true;
+            human.getSelections().add(Integer.valueOf(selected.getActionCommand()));
+            if(WinningMoves.evaluateWin(human)){
+                System.out.println("You Win");
+                JOptionPane.showMessageDialog(null, "Human Winner");
+            }
             computerTurn();
-
         }
     }
 
@@ -74,29 +75,37 @@ public class Board {
             tile[i] = new JButton();
             tile[i].setBackground(Color.BLACK);
             cellPanel.add(tile[i]);
-        //    tiles.add(tile[i]);
+            //    tiles.add(tile[i]);
             tile[i].setActionCommand("" + i);
             tile[i].addActionListener(this::actionPerformed);
             tile[i].setText("Click Me!");
-
         }
     }
 
     public void computerTurn() {
-        ComputerBrain brain = new ComputerBrain();
         int rand = brain.think();
-        JButton select = (JButton) tile[rand];
+        JButton select = tile[rand];
         if (select.getText().equals("Click Me!")) {
             select.doClick();
-        } else if (tiles.size() == 9){
-            System.out.println("You win!");
-        }else {
+            brain.getSelections().add(rand);
+            if(WinningMoves.evaluateWin(brain)){
+                System.out.println("Computer Win");
+                JOptionPane.showMessageDialog(null, "Computer Winner");
+            }
+        }
+        else if (tiles.size() == 9) {
+            System.out.println("Draw");
+        }
+
+        else {
             computerTurn();
         }
-
-        }
-
     }
+}
+
+
+
+
 
 
 

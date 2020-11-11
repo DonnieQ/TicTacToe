@@ -1,12 +1,12 @@
 package com.myproject;
 
 import java.io.PrintWriter;
+import java.util.Set;
 
 public interface Gamer {
-    public void setName(String name);
-    public String getName();
+    void setName(String name);
+    String getName();
 
-PrintWriter scoreKeeper = new PrintWriter(System.out);
-
+    Set<Integer> getSelections();
 
 }
