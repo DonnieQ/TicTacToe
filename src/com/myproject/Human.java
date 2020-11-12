@@ -23,7 +23,7 @@ public class Human implements Gamer {
     }
 
     public String getName() {
-        System.out.println("Welcome to TicTacToe " + name);
+
         return this.name;
     }
 

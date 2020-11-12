@@ -48,12 +48,12 @@ public class Board {
         if (isComputer) {
 
             selected.setIcon(new ImageIcon("halloween_pennywise-512.png"));
-            selected.setText(".");
+            selected.setText("");
             tiles.add(selected);
 
             brain.getSelections().add(Integer.valueOf(selected.getActionCommand()));
             isComputer = false;
-            superCheckWinner();
+            checkWinner();
         } else {
 
             selected.setIcon(new ImageIcon("yellowRaincoat.png"));
@@ -62,7 +62,7 @@ public class Board {
 
             human.getSelections().add(Integer.valueOf(selected.getActionCommand()));
             isComputer = true;
-            superCheckWinner();
+            checkWinner();
             computerTurn(brain.think());
         }
     }
@@ -83,8 +83,9 @@ public class Board {
     }
 
     public void computerTurn(int num) {
-        while (isComputer && tiles.size() <= 9) {
-            JButton select = tile[num];
+        JButton select = tile[num];
+        if (isComputer && tiles.size() < 9) {
+
             if (!tiles.contains(tile[5])) {
                 tile[5].doClick();
             } else if (!tiles.contains(tile[3])) {
@@ -101,13 +102,15 @@ public class Board {
                 tile[6].doClick();
             } else if (!tiles.contains(select)) {
                 select.doClick();
-            } else {
-                break;
+            } else if(!tiles.contains(tile[1])){
+                tile[1].doClick();
+            }else if (!tiles.contains(tile[num])){
+                tile[brain.think()].doClick();
             }
         }
     }
 
-    public void superCheckWinner() {
+    public void checkWinner() {
         if (WinningMoves.evaluateWin(brain)) {
             JOptionPane.showMessageDialog(board, new ImageIcon("halloween_pennywise-512.png"), "Game over, winner is:", 1);
             System.exit(0);
