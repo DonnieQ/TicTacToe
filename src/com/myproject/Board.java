@@ -93,8 +93,8 @@ public class Board {
                 tile[7].doClick();
             } else if (!tiles.contains(tile[9])) {
                 tile[9].doClick();
-            } else if (!tiles.contains(tile[1])) {
-                tile[1].doClick();
+            } else if (!tiles.contains(tile[8])) {
+                tile[8].doClick();
             } else if (!tiles.contains(tile[4])) {
                 tile[4].doClick();
             } else if (!tiles.contains(tile[6])) {
@@ -115,7 +115,7 @@ public class Board {
             JOptionPane.showMessageDialog(board, new ImageIcon("yellowRaincoat.png"), "Game over, winner is:", 1);
             System.exit(0);
         } else if (tiles.size() == 9) {
-            JOptionPane.showMessageDialog(board, "Draw!!");
+            JOptionPane.showMessageDialog(board, new ImageIcon("drawFloat.png"));
             System.exit(0);
         }
     }
