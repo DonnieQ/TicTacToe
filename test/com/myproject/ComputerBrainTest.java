@@ -1,12 +1,33 @@
+
 package com.myproject;
 
-import junit.framework.TestCase;
+
+
+import com.myproject.retryrule.Retry;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
-public class ComputerBrainTest extends TestCase {
+import static org.junit.Assert.assertNotEquals;
 
-    public void testThink() {
-        ComputerBrainTest memory = new ComputerBrainTest();
+
+public class ComputerBrainTest{
+    ComputerBrain memory;
+    @Rule
+    public Retry retry = new Retry(10);
+
+
+    @Before
+    public void setUp() {
+        memory = new ComputerBrain();
+    }
+
+    @Test
+    public void testIfComputerReturns_validRanges() {
+        ComputerBrain memory = new ComputerBrain();
+        memory.think();
+        System.out.println("x");
+        assertNotEquals(0, memory.think());
     }
 
     public void testIfAllNumbers_AreReturned() {
