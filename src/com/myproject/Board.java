@@ -55,7 +55,6 @@ public class Board {
             isComputer = false;
             selected.setEnabled(false);
             checkWinner();
-            selected.setEnabled(false);
 
         } else {
 
