@@ -53,7 +53,10 @@ public class Board {
 
             brain.getSelections().add(Integer.valueOf(selected.getActionCommand()));
             isComputer = false;
+            selected.setEnabled(false);
             checkWinner();
+            selected.setEnabled(false);
+
         } else {
 
             selected.setIcon(new ImageIcon("yellowRaincoat.png"));
@@ -62,6 +65,7 @@ public class Board {
 
             human.getSelections().add(Integer.valueOf(selected.getActionCommand()));
             isComputer = true;
+            selected.setEnabled(false);
             checkWinner();
             computerTurn(brain.think());
         }
@@ -104,7 +108,7 @@ public class Board {
                 select.doClick();
             } else if(!tiles.contains(tile[1])){
                 tile[1].doClick();
-            }else if (!tiles.contains(tile[num])){
+            } else if (!tiles.contains(tile[num])){
                 tile[brain.think()].doClick();
             }
         }
